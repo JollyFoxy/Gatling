@@ -7,7 +7,9 @@ import scala.language.postfixOps
 class LoadTest extends Simulation{
   val httpConf=http.baseUrl("https://demoqa.com/swagger/")
 
-  val snc = scenario("First").exec(account)
+  val snc = scenario("First") randomSwitch(
+    (100,account)
+  )
 
   setUp(snc.inject(constantUsersPerSec(100)during(15 seconds))
     .protocols(httpConf))
