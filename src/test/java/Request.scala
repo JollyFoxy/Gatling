@@ -21,7 +21,17 @@ object Request {
     session => session.set("UUID", UUID.randomUUID().toString)
   ).exec(
     http("delete")
-      .delete("/Account/v1/User/${UUID}")
+      .delete("/Account/v1/User/{UUID}")
+      .check(status.is(200))
+  )
+  val postUser = exec(
+    session => session.set("userName", UUID.randomUUID().toString)
+  ).exec(
+    session => session.set("password", UUID.randomUUID().toString)
+  ).exec(
+    http( "new user")
+      .post("/Account/v1/User")
+      .body(ElFileBody("body.json")).asJson
       .check(status.is(200))
   )
 }
