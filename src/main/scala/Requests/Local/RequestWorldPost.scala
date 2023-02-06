@@ -13,7 +13,7 @@ object RequestWorldPost {
     Map("userName" -> s"${Random.alphanumeric.take(20).mkString}@foo.com")
   }
   private val feederPass = Iterator.continually {
-    Map("password" -> s"${Random.alphanumeric.take(20).mkString}@foo.com")
+    Map("password" -> s"${Random.alphanumeric.take(10).mkString}@foo.com")
   }
     val postLocalUser: ChainBuilder = feed(feederPass)
       .feed(feederName)
