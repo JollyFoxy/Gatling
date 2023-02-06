@@ -6,8 +6,8 @@
   },"response": {
     "status": 201,
     "jsonBody":{
-      "userId": "string",
-      "username": "string"
+      "userName": "${userName}",
+      "password": "${password}"
     }
   }
 }

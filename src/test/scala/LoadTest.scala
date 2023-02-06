@@ -4,6 +4,8 @@ import Requests.RequestPost._
 import Requests.RequestPut._
 import Requests.Local.RequestHelloWorld._
 import Requests.Local.RequestWorldPost._
+import com.github.tomakehurst.wiremock.WireMockServer
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
@@ -25,8 +27,11 @@ class LoadTest extends Simulation{
     .exec(getHelloWorld)
     .exec(postLocalUser)
 
-  before(println("Начало"))
-  after(println("Конец"))
+  private val port = 8080
+  private val wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().port(port))
+
+  before(wireMockServer.start())
+  after( wireMockServer.stop())
 
   setUp(
     scn2.inject(
