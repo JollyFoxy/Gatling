@@ -1,0 +1,13 @@
+{
+  "name": "Простая заглушка - Привет мир2!",
+  "request": {
+    "method": "POST",
+    "url": "/some/thing2"
+  },"response": {
+    "status": 201,
+    "jsonBody":{
+      "userId": "string",
+      "username": "string"
+    }
+  }
+}
