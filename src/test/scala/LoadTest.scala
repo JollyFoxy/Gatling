@@ -1,11 +1,12 @@
+import Requests.Local.RequestHelloWorld._
+import Requests.Local.RequestWorldPost._
 import Requests.RequestDelete._
 import Requests.RequestGet._
 import Requests.RequestPost._
 import Requests.RequestPut._
-import Requests.Local.RequestHelloWorld._
-import Requests.Local.RequestWorldPost._
 import com.github.tomakehurst.wiremock.WireMockServer
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration
+import com.github.tomakehurst.wiremock.client.WireMock
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
@@ -14,6 +15,20 @@ import io.gatling.http.protocol.HttpProtocolBuilder
 import scala.concurrent.duration._
 import scala.language.postfixOps
 class LoadTest extends Simulation{
+
+  val Port = 8080
+  val Host = "localhost"
+  val wireMockServer = new WireMockServer(wireMockConfig().port(Port))
+
+   before {
+    wireMockServer.start()
+    WireMock.configureFor(Host, Port)
+  }
+
+   after {
+    wireMockServer.stop()
+  }
+
 
   val httpConf: HttpProtocolBuilder =http.baseUrl("http://localhost:8080")
 
@@ -26,12 +41,6 @@ class LoadTest extends Simulation{
   val scn2: ScenarioBuilder = scenario("Second")
     .exec(getHelloWorld)
     .exec(postLocalUser)
-
-  private val port = 8080
-  private val wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().port(port))
-
-  before(wireMockServer.start())
-  after( wireMockServer.stop())
 
   setUp(
     scn2.inject(
