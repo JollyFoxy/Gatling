@@ -1,5 +1,5 @@
-import Requests.Local.RequestHelloWorld._
-import Requests.Local.RequestWorldPost._
+import Requests.Local.Get._
+import Requests.Local.Post._
 import Requests.RequestDelete._
 import Requests.RequestGet._
 import Requests.RequestPost._
@@ -15,19 +15,22 @@ import io.gatling.http.protocol.HttpProtocolBuilder
 import scala.concurrent.duration._
 import scala.language.postfixOps
 class LoadTest extends Simulation{
-
+/*
   val Port = 8080
   val Host = "localhost"
   val wireMockServer = new WireMockServer(wireMockConfig().port(Port))
+  val loadTestConfiguration = LoadTestConfiguration.fromEnvironment()
 
-   before {
-    wireMockServer.start()
-    WireMock.configureFor(Host, Port)
+
+  before {
+    loadTestConfiguration.before()
+    loadTestConfiguration.manyStubGetScenario()
   }
 
-   after {
-    wireMockServer.stop()
+  after {
+    loadTestConfiguration.after()
   }
+*/
 
 
   val httpConf: HttpProtocolBuilder =http.baseUrl("http://localhost:8080")

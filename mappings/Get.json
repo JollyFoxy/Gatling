@@ -6,9 +6,6 @@
   },
   "response": {
     "status": 200,
-    "body": "Hello world!",
-    "headers": {
-      "Content-Type": "text/plain"
-    }
+    "body": "Hello world!"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "post заглушка",
+  "request": {
+    "method": "POST",
+    "url": "/some/thing2"
+  },"response": {
+    "status": 201,
+    "jsonBody": {
+      "username": "{{jsonPath request.body '$.userName'}}",
+      "password": "{{jsonPath request.body '$.password'}}"
+    }
+  }
+}

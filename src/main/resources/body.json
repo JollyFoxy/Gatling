@@ -1,4 +1,4 @@
 {
-  "userName": "${userName}",
+  "username": "${userName}",
   "password": "${password}"
 }

@@ -6,11 +6,11 @@ import io.gatling.http.Predef._
 
 import scala.util.Random
 
-object RequestWorldPost {
+object Post {
 
 
   private val feederName = Iterator.continually {
-    Map("userName" -> s"${Random.alphanumeric.take(20).mkString}@foo.com")
+    Map("userName" -> s"${Random.nextString(20).mkString}@foo.com")
   }
   private val feederPass = Iterator.continually {
     Map("password" -> s"${Random.alphanumeric.take(10).mkString}@foo.com")
