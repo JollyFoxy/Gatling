@@ -10,10 +10,10 @@ object Post {
 
 
   private val feederName = Iterator.continually {
-    Map("userName" -> s"${Random.nextString(20).mkString}@foo.com")
+    Map("userName" -> s"${Random.nextString(10).mkString}")
   }
   private val feederPass = Iterator.continually {
-    Map("password" -> s"${Random.alphanumeric.take(10).mkString}@foo.com")
+    Map("password" -> s"${Random.alphanumeric.take(10).mkString}")
   }
     val postLocalUser: ChainBuilder = feed(feederPass)
       .feed(feederName)

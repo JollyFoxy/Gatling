@@ -9,20 +9,46 @@
     <version>3.9.0</version>
 
     <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <gatling.version>${project.version}</gatling.version>
-    <gatling-maven-plugin.version>4.2.9</gatling-maven-plugin.version>
-    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-    <scala-maven-plugin.version>4.8.0</scala-maven-plugin.version>
-    </properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <gatling.version>${project.version}</gatling.version>
+        <gatling-maven-plugin.version>4.2.9</gatling-maven-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <scala-maven-plugin.version>4.8.0</scala-maven-plugin.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <version>${gatling.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-core</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-http</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-jdbc</artifactId>
+            <version>3.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
@@ -30,55 +56,14 @@
             <version>2.35.0</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>5.1.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
+            <groupId>org.zapodot</groupId>
+            <artifactId>embedded-jms-junit5</artifactId>
+            <version>0.2</version>
         </dependency>
     </dependencies>
-
     <build>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>${scala-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <jvmArgs>
-                                <jvmArg>-Xss100M</jvmArg>
-                            </jvmArgs>
-                            <args>
-                                <arg>-deprecation</arg>
-                                <arg>-feature</arg>
-                                <arg>-unchecked</arg>
-                                <arg>-language:implicitConversions</arg>
-                                <arg>-language:postfixOps</arg>
-                            </args>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
